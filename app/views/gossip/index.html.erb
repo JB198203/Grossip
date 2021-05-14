@@ -1,0 +1,37 @@
+
+<h2>Bienvenue <%= User.find_by(id: session[:user_id]).first_name %> !</h2>
+
+
+<%= @gossips.each_with_index do |gossip|%> 
+<div class="card text-center">
+  <div class="card-header">
+    .. en ce moment sur Gossip Project ..
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Potin n°<%= gossip.id %></h5>
+    <p class="card-text">"<%=gossip.content%>"<footer class="blockquote-footer"><%=gossip.user.first_name%></footer></p>
+    
+    <a class="btn btn-primary" href = "../gossip/<%=gossip.id%>"> Accéder au potin</a>
+  </div>
+  <div class="card-footer">
+    <div class="row">
+      <div class="col-sm ">
+      </div>
+        <div class="col-sm">
+          <% pre_like = gossip.likes.find { |like| like.user_id == current_user.id} %>
+          <% if pre_like %>
+          <%= button_to 'Unlike', gossip_like_path(gossip, pre_like), method: :delete %><%= gossip.likes.count%> 
+          <%else%>
+          <%= button_to 'Like', gossip_likes_path(gossip.id), method: :post %> <%= gossip.likes.count%> 
+          <% end %>
+        </div>
+
+      <div class="col-sm text-center text-muted">
+          <%=gossip.created_at.strftime("Le %d/%m/%Y à %I:%M")%>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+  <%end%>
+

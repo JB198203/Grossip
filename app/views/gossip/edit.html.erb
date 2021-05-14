@@ -1,0 +1,19 @@
+<html>
+  <body>
+    <!-- ... -->
+    <%= form_for @gossip do |i| %>
+      <div class = "form-group">
+      <%= i.text_field :title, placeholder: 'title',class:'form-control'%>
+      </div>
+        <br /> <br />
+      <div class = "form-group">
+      <%= i.text_field :content, placeholder: 'content', class:'form-control' %>
+      </div>
+      <div class = "form-group">
+        <button class= "btn btn-primary" type="submit">modifier</button>
+      </div>
+    <%end%>
+    <!-- ... -->
+  </body>
+</html>
+

@@ -1,0 +1,93 @@
+
+<div class="card text-center">
+  <div class="card-header">
+    Gossip n°<%=@gossip.id%> 
+  </div>
+
+  <div class="card-body">
+    <h5 class="card-title"> Title : <%=@gossip.title%></h5>
+    <p class="card-text font-italic"> "<%=@gossip.content%>"</p>
+    <a class="btn btn-primary" href="<%=city_path(@gossip.user.city.id)%>"> Autres Gossips sur <%=@gossip.user.city.city_name%> </a>
+    <a class="btn btn-primary" href="<%=user_path(@gossip.user.id)%>" > En savoir + sur l'auteur (<%=@gossip.user.first_name%>)</a>
+    <a class="btn btn-primary" href="<%= edit_gossip_path %>" > Modifier potin</a>
+    <a class="btn btn-primary" href="<%=gossip_path %>" data-method="DELETE"> supprimer potin</a>
+  </div>
+
+  <div class="card-footer">
+    <div class="row">
+      <div class="col-sm ">
+      </div>
+        <div class="col-sm">
+          <% pre_like = @gossip.likes.find { |like| like.user_id == current_user.id} %>
+          <% if pre_like %>
+          <%= button_to 'Unlike', gossip_like_path(@gossip, pre_like), method: :delete %><%= @gossip.likes.count%> 
+          <%else%>
+          <%= button_to 'Like', gossip_likes_path(@gossip.id), method: :post %> <%= @gossip.likes.count%> 
+          <% end %>
+        </div>
+
+      <div class="col-sm text-center text-muted">
+          <%=@gossip.created_at.strftime("Le %d/%m/%Y à %I:%M")%>
+      </div>
+    </div>
+  </div>
+</div>
+      
+
+
+
+
+
+  
+  <div class="card-body">
+      <h5 class="card-title text-center"> Commentaires </h5>
+  </div>
+
+  <div class="container">
+  
+      <% @comments.map do  |comment| %> 
+    
+        <div class="row">
+            <div class="col-12 text-center">
+        
+              <a class= "text-left" href = "../user/<%= comment.user_id%>"><%= comment.user.first_name%>  </a> :"<%=comment.content%>"
+            
+              <small class="text-right" ><%= link_to "Edit", edit_gossip_comment_path(@gossip.id, comment.id) %></small>
+            </div>
+        </div>
+      
+  </div>
+  
+  <% end %>
+
+  
+<br>
+
+    
+<div class="container">
+    
+ <%= form_tag(gossip_comment_index_path(@id), method: "post") do %>
+    <%= text_field_tag 'gossip_id', @id, type: 'hidden', class: 'form-control' %>
+    <%= text_field_tag 'user_id', current_user, type: 'hidden', class: 'form-control' %>
+     <div class="form-group">
+    
+         <%= text_field_tag 'content', '', required: true, class: 'form-control' %>
+          <%= label_tag 'Nouveau commentaire' %>
+     
+     <div class= "text-right">
+    <%= submit_tag "Envoyer", class: 'btn btn-outline-primary btn-sm' %>
+    </div>
+    </div>
+ <% end %>                
+</div>
+</div>
+
+  
+
+
+
+
+    
+
+
+    

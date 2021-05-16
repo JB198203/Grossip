@@ -1,0 +1,25 @@
+<html>
+  <body>
+    <!-- ... -->
+    
+    <%= form_tag url_for(action: 'create'), method: "post" do %>
+
+      <%= label_tag 'title' %>
+      <%= text_field_tag 'title', @gossip.title %>
+      <br /> <br />
+
+      <%= label_tag 'content' %>
+      <%= text_area_tag 'content', @gossip.content %>
+      <br /> <br />
+
+
+      <%= submit_tag "create Post" %> 
+
+    <% end %>
+  
+    
+    
+    <!-- ... -->
+  </body>
+</html>
+

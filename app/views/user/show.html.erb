@@ -1,0 +1,17 @@
+
+<div class="card text-center">
+  <div class="card-header">
+    Auteur
+  </div>
+  <div class="card-body">
+    <p class="card-text"> Prénom : <%=@user.first_name%></p>
+    <p class="card-text"> Nom  : <%=@user.last_name%></p>
+    <p class="card-text"> Mail : <%=@user.email%></p>
+    <p class="card-text"> Ville :<a class="card-text " href = "<%=city_path(@user.city.id)%>"> <%=@user.city.city_name%></a></p>
+    <p class="card-text"> Age : <%=@user.age%></p>
+    <p class="card-text"> Description : <%=@user.description%></p>
+  </div>
+  <div class="card-footer text-muted">
+    <%=@user.created_at.strftime("inscrit depuis le %d/%m/%Y")%>
+  </div>
+</div>

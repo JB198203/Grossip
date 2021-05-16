@@ -10,7 +10,7 @@ class GossipController < ApplicationController
   def show
     @id= params[:id]
     @gossip = Gossip.find(params[:id])
-    @comments = Gossip.find(params[:id]).comment
+    @comments = Gossip.find(params[:id]).comments
     @comment = Comment.new(content: params['content'], gossip_id: @gossip ,user_id: 1)
     @pre_like = @gossip.likes.find { |like| like.user_id == current_user.id} 
   end
